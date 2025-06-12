@@ -24,17 +24,34 @@ class StudentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function addStudent(Request $request)
     {
-        //
+        $student = new Student();
+        $student->name = $request->name;
+        $student->email = $request->email;
+        $student->password = $request->password;
+        if ($student->save()) {
+            return ["result" => "success"];
+        } else {
+            return ["result" => "Fail"];
+        }
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function updateStudent(Request $request)
     {
-        //
+        $student = Student::find($request->id);
+        if ($student) {
+            $student->name = $request->name;
+            $student->email = $request->email;
+            $student->password = $request->password;
+            $student->save();
+            return ["result" => "success"];
+        } else {
+            return ["result" => "Fail"];
+        }
     }
 
     /**
