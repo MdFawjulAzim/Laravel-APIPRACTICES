@@ -57,10 +57,18 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student)
+    public function deleteStudent($id)
     {
-        //
+        $student = Student::find($id);
+
+        if ($student) {
+            $student->delete();
+            return ["result" => "{$id} Successfully Deleted!"];
+        } else {
+            return ["result" => "Fail", "api" => "{$id} does not exist"];
+        }
     }
+
 
     /**
      * Show the form for editing the specified resource.
